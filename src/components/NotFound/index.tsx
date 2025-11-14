@@ -1,7 +1,7 @@
-import { Button, Empty } from "antd";
-import { useNavigate } from "react-router-dom";
-import { createStyles } from "antd-style";
-import notFoundSvg from "@/assets/svg/404.svg";
+import { Button, Empty } from 'antd'
+import { useNavigate } from 'react-router-dom'
+import { createStyles } from 'antd-style'
+import notFoundSvg from '@/assets/svg/404.svg'
 
 const useStyles = createStyles(({ css, token }) => ({
   container: css`
@@ -12,11 +12,11 @@ const useStyles = createStyles(({ css, token }) => ({
     min-height: 100vh;
     padding: ${token.paddingLG}px;
   `,
-}));
+}))
 
 export default function NotFound() {
-  const navigate = useNavigate();
-  const { styles } = useStyles();
+  const navigate = useNavigate()
+  const { styles } = useStyles()
 
   return (
     <div className={styles.container}>
@@ -25,10 +25,10 @@ export default function NotFound() {
         image={notFoundSvg}
         description="抱歉，您访问的页面不存在"
       >
-        <Button type="primary" onClick={() => navigate("/")}>
+        <Button type="primary" onClick={() => navigate('/')}>
           返回首页
         </Button>
       </Empty>
     </div>
-  );
+  )
 }

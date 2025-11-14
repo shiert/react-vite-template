@@ -40,6 +40,11 @@ export default defineConfig((configEnv: ConfigEnv) => {
       },
     },
 
+    // 生产环境移除 console 和 debugger
+    esbuild: {
+      drop: mode === "production" ? ["console", "debugger"] : [],
+    },
+
     // 构建配置
     build: {
       outDir: "dist",
@@ -48,10 +53,42 @@ export default defineConfig((configEnv: ConfigEnv) => {
       // 代码分割
       rollupOptions: {
         output: {
-          manualChunks: {
-            "react-vendor": ["react", "react-dom", "react-router-dom"],
-            "antd-vendor": ["antd", "antd-style"],
-            "state-vendor": ["jotai", "ahooks"],
+          // 自定义文件命名
+          chunkFileNames: "js/[name]-[hash].js",
+          entryFileNames: "js/[name]-[hash].js",
+          assetFileNames: (assetInfo) => {
+            // CSS 文件
+            if (assetInfo.names?.[0]?.endsWith('.css')) {
+              return 'css/[name]-[hash][extname]'
+            }
+            // 其他资源文件(图片、字体等)
+            return 'assets/[name]-[hash][extname]'
+          },
+          // 智能代码分割
+          manualChunks(id) {
+            if (id.includes("node_modules")) {
+              // 统一路径分隔符(Windows \ 转为 /)
+              const normalizedId = id.replace(/\\/g, '/')
+
+              // 图表库
+              if (normalizedId.includes('/@ant-design/plots') || normalizedId.includes('/@antv')) {
+                return "charts-vendor"
+              }
+              // React 全家桶
+              if (normalizedId.includes('/react/') || normalizedId.includes('/react-dom/') || normalizedId.includes('/react-router')) {
+                return "react-vendor"
+              }
+              // Ant Design 相关
+              if (normalizedId.includes('/antd/') || normalizedId.includes('/antd-style/')) {
+                return "antd-vendor"
+              }
+              // 状态管理和工具库
+              if (normalizedId.includes('/jotai/') || normalizedId.includes('/ahooks/') || normalizedId.includes('/axios/')) {
+                return "utils-vendor"
+              }
+              // 其他第三方库统一打包
+              return "vendor"
+            }
           },
         },
       },

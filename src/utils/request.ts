@@ -57,10 +57,10 @@ request.interceptors.response.use(
         'color: #ff4d4f; font-weight: bold',
         { status, data }
       )
-      if(error.response.status === 401) {
+      if (error.response.status === 401) {
         // 处理未授权错误
         message.error('未授权，请重新登录')
-      }else {
+      } else {
         // 处理其他错误
         message.error(data?.message || error.message || '请求失败')
       }
@@ -76,6 +76,5 @@ request.interceptors.response.use(
     return Promise.reject(error)
   }
 )
-
 
 export default request
