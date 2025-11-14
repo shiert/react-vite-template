@@ -138,14 +138,14 @@ export const getUserInfo = () =>
 **API 响应规范**：
 ```typescript
 interface ApiResponse<T> {
-  status: number    // 0 表示成功
+  status: number    // 200 表示成功
   message: string   // 响应消息
   data: T           // 响应数据
 }
 ```
 
 **错误处理**：
-- `status !== 0`：自动提示错误信息
+- `status !== 200`：自动提示错误信息
 - HTTP/网络错误：统一错误提示
 - 特殊处理：业务层自行捕获
 

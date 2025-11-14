@@ -16,4 +16,18 @@ export const PRESET_COLORS = {
 
 export type ThemeColor = typeof PRESET_COLORS[keyof typeof PRESET_COLORS]
 
-export const themeAtom = atomWithStorage<ThemeColor>('theme', PRESET_COLORS.daybreak)
+// 同步读取 localStorage 中的主题色，避免闪烁
+const getInitialTheme = (): ThemeColor => {
+  try {
+    const stored = localStorage.getItem('theme')
+    if (stored) {
+      const parsed = JSON.parse(stored)
+      return parsed as ThemeColor
+    }
+  } catch {
+    // 忽略错误，使用默认值
+  }
+  return PRESET_COLORS.daybreak
+}
+
+export const themeAtom = atomWithStorage<ThemeColor>('theme', getInitialTheme())
