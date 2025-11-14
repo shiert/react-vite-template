@@ -26,7 +26,7 @@ const Loading: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <Spin  />
+      <Spin />
       <div className={styles.tip}>加载中...</div>
     </div>
   )

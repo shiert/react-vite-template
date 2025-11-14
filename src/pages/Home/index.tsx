@@ -27,7 +27,9 @@ const useStyles = createStyles(({ css }) => ({
 
     &.active {
       border-color: #000;
-      box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000;
+      box-shadow:
+        0 0 0 2px #fff,
+        0 0 0 4px #000;
     }
   `,
   colorGrid: css`
