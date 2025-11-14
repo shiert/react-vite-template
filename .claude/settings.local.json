@@ -4,7 +4,9 @@
       "Bash(yarn add -D less)",
       "Bash(mkdir:*)",
       "Bash(rm:*)",
-      "Bash(yarn build)"
+      "Bash(yarn build)",
+      "Bash(dir:*)",
+      "Bash(del yarn.lock)"
     ],
     "deny": [],
     "ask": []

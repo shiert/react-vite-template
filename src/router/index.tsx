@@ -6,7 +6,7 @@ import Loading from '@/components/Loading'
 // 懒加载页面组件
 const Home = lazy(() => import('@/pages/Home'))
 const About = lazy(() => import('@/pages/About'))
-const NotFound = lazy(() => import('@/pages/NotFound'))
+const NotFound = lazy(() => import('@/components/NotFound'))
 
 // 包装 Suspense 的高阶组件
 const withSuspense = (Component: React.LazyExoticComponent<() => JSX.Element>) => (

@@ -53,38 +53,18 @@
         }
       }
 
-      /* 隐藏 loading 的动画 */
-      .loading-fade-out {
-        animation: fadeOut 0.3s ease-out forwards;
-      }
-
-      @keyframes fadeOut {
-        to {
-          opacity: 0;
-          visibility: hidden;
-        }
-      }
     </style>
   </head>
   <body>
     <div id="root">
       <div id="app-loading">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">加载中...</div>
+        <div class="loading-dots">
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+          <div class="loading-dot"></div>
+        </div>
       </div>
     </div>
     <script type="module" src="/src/main.tsx"></script>
-    <script>
-      // React 应用加载完成后移除 loading
-      window.addEventListener('load', function() {
-        const loading = document.getElementById('app-loading');
-        if (loading) {
-          loading.classList.add('loading-fade-out');
-          setTimeout(function() {
-            loading.remove();
-          }, 300);
-        }
-      });
-    </script>
   </body>
 </html>

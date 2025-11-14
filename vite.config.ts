@@ -18,9 +18,8 @@ export default defineConfig((configEnv: ConfigEnv) => {
       // 跨域代理配置
       proxy: {
         "/api": {
-          target: env.VITE_API_PROXY_TARGET || "http://localhost:3000",
+          target: env.VITE_API_TARGET,
           changeOrigin: true,
-          rewrite: (reqPath) => reqPath.replace(/^\/api/, ""),
         },
       },
     },
@@ -59,11 +58,7 @@ export default defineConfig((configEnv: ConfigEnv) => {
       // chunk 大小警告限制
       chunkSizeWarningLimit: 1000,
     },
-
-    // 通过 esbuild 在打包时移除调试语句
-    esbuild: {
-      drop: ["console", "debugger"],
-    },
+   
   };
 
   return userConfig;

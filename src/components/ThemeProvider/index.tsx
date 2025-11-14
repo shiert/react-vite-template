@@ -1,4 +1,4 @@
-import { ConfigProvider, theme } from 'antd'
+import { ConfigProvider } from 'antd'
 import { ThemeProvider as AntdStyleProvider } from 'antd-style'
 import { useAtomValue } from 'jotai'
 import { themeAtom } from '@/store/theme'
@@ -9,16 +9,18 @@ interface ThemeProviderProps {
 }
 
 export default function ThemeProvider({ children }: ThemeProviderProps) {
-  const themeMode = useAtomValue(themeAtom)
+  const themeColor = useAtomValue(themeAtom)
 
   return (
     <ConfigProvider
       locale={zhCN}
       theme={{
-        algorithm: themeMode === 'dark' ? theme.darkAlgorithm : theme.defaultAlgorithm,
+        token: {
+          colorPrimary: themeColor,
+        },
       }}
     >
-      <AntdStyleProvider themeMode={themeMode}>{children}</AntdStyleProvider>
+      <AntdStyleProvider>{children}</AntdStyleProvider>
     </ConfigProvider>
   )
 }

@@ -15,7 +15,7 @@
  * ```
  */
 
-import { request } from './request'
+import request from './request'
 import type {
   ApiResponse,
   LoginParams,

@@ -8,8 +8,8 @@ const useStyles = createStyles(({ css, token }) => ({
     align-items: center;
     justify-content: center;
     gap: 12px;
-    height: 100%;
     width: 100%;
+    min-height: 200px;
   `,
   tip: css`
     color: ${token.colorTextSecondary};

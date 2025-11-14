@@ -2,80 +2,88 @@
 
 一个开箱即用的 React + Vite 开发模板，集成了常用的开发工具和最佳实践。
 
-## 技术栈
+## ✨ 技术栈
 
-- ⚛️ **React 19** - 最新的 React 版本
-- ⚡ **Vite** - 极速的开发体验
-- 🎨 **Ant Design** - 企业级 UI 组件库
-- 🎭 **antd-style** - 主题切换支持
-- 🗂️ **React Router v6** - 路由管理
-- 📡 **Axios** - HTTP 请求库
-- 🪝 **ahooks** - React Hooks 工具库
-- 💾 **Jotai** - 原子化状态管理
-- 📘 **TypeScript** - 类型安全
-- 🎨 **Less** - CSS 预处理器
+### 核心框架
+- ⚛️ **React 18.3.1** - 稳定的 React 版本
+- ⚡ **Vite 7.2.2** - 极速的开发体验
+- 📘 **TypeScript 5.9.3** - 类型安全
 
-## 项目结构
+### UI & 样式
+- 🎨 **Ant Design 5.28.1** - 企业级 UI 组件库
+- 🎭 **antd-style 3.7.1** - CSS-in-JS 解决方案
+- 📊 **@ant-design/plots 2.6.6** - 数据可视化图表库
+- 🎨 **Less 4.4.2** - CSS 预处理器
+
+### 状态管理 & 路由
+- 💾 **Jotai 2.15.1** - 原子化状态管理
+- 🗂️ **React Router v7.9.5** - 路由管理
+
+### 工具库
+- 🪝 **ahooks 3.9.6** - React Hooks 工具库
+- 📡 **Axios 1.13.2** - HTTP 客户端
+
+## 📁 项目结构
 
 ```
 src/
-├── pages/          # 页面组件
-│   ├── Home/       # 首页
-│   ├── About/      # 关于页
-│   └── NotFound/   # 404页面
-├── components/     # 公共组件
-│   └── ThemeProvider/  # 主题配置组件
-├── layouts/        # 布局组件
-│   └── BasicLayout/    # 基础布局
-├── router/         # 路由配置
-│   └── index.tsx   # 路由配置文件
-├── store/          # Jotai 状态管理
-│   ├── theme.ts    # 主题状态
-│   └── user.ts     # 用户状态
-├── services/       # API 服务
-│   └── request.ts  # Axios 实例配置
-├── hooks/          # 自定义 Hooks
-├── utils/          # 工具函数
-├── styles/         # 全局样式
-│   └── global.less # 全局样式文件
-└── types/          # TypeScript 类型定义
+├── components/          # 公共组件
+│   ├── Loading/         # 加载组件
+│   ├── ThemeProvider/   # 主题提供者
+│   └── NotFound/        # 404 页面
+├── layouts/             # 布局组件
+│   └── BasicLayout/     # 基础布局
+├── pages/               # 页面组件
+│   ├── Home/            # 首页
+│   └── About/           # 关于页
+├── router/              # 路由配置
+│   └── index.tsx        # 路由定义
+├── services/            # API 服务
+│   ├── api.ts           # API 接口定义
+│   └── request.ts       # Axios 封装
+├── store/               # Jotai 状态管理
+│   ├── theme.ts         # 主题状态
+│   └── user.ts          # 用户状态
+├── types/               # TypeScript 类型定义
+│   └── api.ts           # API 类型
+├── styles/              # 全局样式
+│   └── global.less      # 全局样式文件
+└── main.tsx             # 应用入口
 ```
 
-## 快速开始
+## 🚀 快速开始
 
 ### 安装依赖
 
 ```bash
-yarn install
-# 或
 npm install
 ```
 
 ### 开发
 
 ```bash
-yarn dev
-# 或
 npm run dev
 ```
 
 ### 构建
 
 ```bash
-yarn build
-# 或
 npm run build
 ```
 
 ### 预览
 
 ```bash
-yarn preview
-# 或
 npm run preview
 ```
 
-## 功能特性
+### 代码检查
+
+```bash
+npm run lint
+```
+
+## 🎯 功能特性
 
 ### 路径别名
 
@@ -86,57 +94,88 @@ import ThemeProvider from '@/components/ThemeProvider'
 import { themeAtom } from '@/store/theme'
 ```
 
-### 主题切换
+### 主题色切换
 
-使用 Jotai 管理主题状态，支持浅色/深色主题切换：
+支持 10 种 Ant Design 预设主题色，点击切换即可应用到所有组件：
 
 ```typescript
 import { useAtom } from 'jotai'
-import { themeAtom } from '@/store/theme'
+import { themeAtom, PRESET_COLORS } from '@/store/theme'
 
-const [theme, setTheme] = useAtom(themeAtom)
-setTheme(theme === 'light' ? 'dark' : 'light')
+const [themeColor, setThemeColor] = useAtom(themeAtom)
+// 切换主题色
+setThemeColor(PRESET_COLORS.sunset) // 日暮橙色
 ```
 
-### HTTP 请求
+**预设颜色**：
+- 🔵 拂晓蓝（默认）`#1677ff`
+- 🔴 薄暮 `#f5222d`
+- 🟠 火山 `#fa541c`
+- 🟠 日暮 `#fa8c16`
+- 🟡 金盏花 `#faad14`
+- 🟢 极光绿 `#52c41a`
+- 🔵 明青 `#13c2c2`
+- 🔵 极客蓝 `#2f54eb`
+- 🟣 酱紫 `#722ed1`
+- 🌸 洋红 `#eb2f96`
 
-已配置好的 Axios 实例，包含请求/响应拦截器：
+### API 请求
+
+统一的 API 请求封装，包含请求/响应拦截器：
 
 ```typescript
 import { request } from '@/services/request'
+import type { ApiResponse, UserInfo } from '@/types/api'
 
-// 使用示例
-const fetchData = async () => {
-  const data = await request({
-    url: '/api/users',
+// 定义接口（需包含 /api 前缀）
+export const getUserInfo = () =>
+  request<ApiResponse<UserInfo>>({
+    url: '/api/user/info',
     method: 'GET',
   })
-  return data
+```
+
+**API 响应规范**：
+```typescript
+interface ApiResponse<T> {
+  status: number    // 0 表示成功
+  message: string   // 响应消息
+  data: T           // 响应数据
 }
 ```
 
+**错误处理**：
+- `status !== 0`：自动提示错误信息
+- HTTP/网络错误：统一错误提示
+- 特殊处理：业务层自行捕获
+
 ### 状态管理
 
-使用 Jotai 进行状态管理：
+使用 Jotai 进行原子化状态管理：
 
 ```typescript
 // 定义 atom
 import { atom } from 'jotai'
 
-export const countAtom = atom(0)
+export const userAtom = atom<UserInfo | null>(null)
 
 // 使用 atom
 import { useAtom } from 'jotai'
-import { countAtom } from '@/store/count'
+import { userAtom } from '@/store/user'
 
-const [count, setCount] = useAtom(countAtom)
+const [user, setUser] = useAtom(userAtom)
 ```
 
 ### 路由配置
 
-在 [src/router/index.tsx](src/router/index.tsx) 中配置路由：
+使用 React Router v7 + 懒加载优化性能：
 
 ```typescript
+import { lazy, Suspense } from 'react'
+import { createBrowserRouter } from 'react-router-dom'
+
+const Home = lazy(() => import('@/pages/Home'))
+
 export const router = createBrowserRouter([
   {
     path: '/',
@@ -144,30 +183,78 @@ export const router = createBrowserRouter([
     children: [
       {
         path: 'home',
-        element: <Home />,
+        element: <Suspense fallback={<Loading />}>
+          <Home />
+        </Suspense>,
       },
     ],
   },
 ])
 ```
 
-## 环境变量
+### 图表开发
 
-复制 `.env.example` 为 `.env` 并配置环境变量：
+集成 @ant-design/plots，开箱即用的数据可视化：
 
-```bash
-cp .env.example .env
+```typescript
+import { Line, Column, Pie } from '@ant-design/plots'
+
+const LineChart = () => {
+  const config = {
+    data: [...],
+    xField: 'date',
+    yField: 'value',
+  }
+  return <Line {...config} />
+}
 ```
 
-## 开发建议
+## ⚙️ 环境变量
 
-1. **组件开发**：在 `src/components` 目录下创建可复用组件
-2. **页面开发**：在 `src/pages` 目录下创建页面组件
-3. **API 服务**：在 `src/services` 目录下创建 API 服务模块
-4. **状态管理**：在 `src/store` 目录下创建 Jotai atoms
-5. **工具函数**：在 `src/utils` 目录下创建工具函数
-6. **自定义 Hooks**：在 `src/hooks` 目录下创建自定义 Hooks
+创建 `.env.development` 和 `.env.production` 配置环境变量：
 
-## License
+```env
+# 开发服务器端口
+VITE_PORT=5173
+
+# API 代理目标（仅开发环境）
+VITE_API_TARGET=http://localhost:3000
+```
+
+**说明**：
+- **开发环境**：所有 `/api/*` 请求会通过 Vite proxy 代理到 `VITE_API_TARGET`
+- **生产环境**：直接请求同域接口，无需配置
+
+## 📝 开发规范
+
+### 代码风格
+- TypeScript 严格模式
+- 函数组件 + Hooks
+- 页面组件懒加载 + Suspense
+- 优先使用 `type` 而非 `interface`
+
+### 命名规范
+- 组件文件：`PascalCase` (UserProfile.tsx)
+- 函数/变量：`camelCase` (getUserInfo)
+- 常量：`UPPER_SNAKE_CASE` (API_BASE_URL)
+- 类型：`PascalCase` (UserInfo, ApiResponse)
+
+### 导入顺序
+1. React 相关
+2. 第三方库
+3. 类型导入
+4. 本地模块（使用 `@/` 别名）
+
+### 组件开发
+- 公共组件放在 `src/components/`
+- 页面组件放在 `src/pages/`
+- 每个组件独立文件夹，包含 `index.tsx`
+- 组件样式优先使用 antd-style (CSS-in-JS)
+
+## 📚 更多信息
+
+详细的开发规范和 API 规范请参考 [claude.md](./claude.md)
+
+## 📄 License
 
 MIT
