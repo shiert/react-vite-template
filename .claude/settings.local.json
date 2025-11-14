@@ -6,7 +6,8 @@
       "Bash(rm:*)",
       "Bash(yarn build)",
       "Bash(dir:*)",
-      "Bash(del yarn.lock)"
+      "Bash(del yarn.lock)",
+      "Bash(npm install)"
     ],
     "deny": [],
     "ask": []

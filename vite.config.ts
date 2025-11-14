@@ -64,32 +64,6 @@ export default defineConfig((configEnv: ConfigEnv) => {
             // 其他资源文件(图片、字体等)
             return 'assets/[name]-[hash][extname]'
           },
-          // 智能代码分割
-          manualChunks(id) {
-            if (id.includes("node_modules")) {
-              // 统一路径分隔符(Windows \ 转为 /)
-              const normalizedId = id.replace(/\\/g, '/')
-
-              // 图表库
-              if (normalizedId.includes('/@ant-design/plots') || normalizedId.includes('/@antv')) {
-                return "charts-vendor"
-              }
-              // React 全家桶
-              if (normalizedId.includes('/react/') || normalizedId.includes('/react-dom/') || normalizedId.includes('/react-router')) {
-                return "react-vendor"
-              }
-              // Ant Design 相关
-              if (normalizedId.includes('/antd/') || normalizedId.includes('/antd-style/')) {
-                return "antd-vendor"
-              }
-              // 状态管理和工具库
-              if (normalizedId.includes('/jotai/') || normalizedId.includes('/ahooks/') || normalizedId.includes('/axios/')) {
-                return "utils-vendor"
-              }
-              // 其他第三方库统一打包
-              return "vendor"
-            }
-          },
         },
       },
       // chunk 大小警告限制
